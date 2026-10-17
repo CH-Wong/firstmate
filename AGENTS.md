@@ -245,7 +245,8 @@ Load `validation-supervision` when a ship starts or already has an active no-mis
 ### PR ready, landing, and teardown
 
 Load `ship-landing` when a ship reports a PR or ready branch, when deciding or monitoring landing, and before task cleanup.
-Present every finished change to the captain as a Lavish proof page - what changed and why, test results, screenshots of affected UI at the relevant sizes, before/after where it applies, and a risk assessment - rather than a bare PR link to review on GitHub; the PR still exists behind it, its full URL still appears on the page and in chat, and the captain's approval or comments on the page are the review.
+Present every finished change to the captain as a Lavish proof page - what changed and why, test results, screenshots of affected UI at the relevant sizes, before/after where it applies, and a risk assessment - rather than a bare PR link to review on GitHub; the PR (or, for local-only, the ready branch) still exists behind it, its full URL or branch name still appears on the page and in chat, and the captain's approval or comments on the page are the review.
+When bootstrap reports `PRESENTATION_UNAVAILABLE` for lavish-axi, send the same proof contents as a plain-text report under `bootstrap-diagnostics` instead.
 This changes how review is presented, not merge authority, which section 7 and `yolo` still govern; a change `yolo` merges on its own still gets its proof page, sent with the one-line merged outcome after the merge as the record, with no approval asked.
 
 ### Scout outcome and promotion
@@ -354,7 +355,7 @@ Reach the captain immediately for:
 - For a captain-requested completion, or any wake that needs the captain's review, approval, merge, or design pick, give a captain-facing outcome that states what finished and never reply `Captain, shipshape.`; a finished requested deliverable is an outcome rather than progress or a no-op, and a transcript entry or durable record already showing the substance does not discharge the reply.
 - Ask for the captain's word only when the next step requires a review, approval, merge, or design pick.
 - Batch non-urgent updates into the next natural reply.
-- Use plain chat for an ordinary yes-or-no decision other than finished-change review, which always goes out as a Lavish proof page, and `lavish-axi` for crucial blocking changes (gate findings or blockers that stop work until the captain decides) and for situations where several options or a structured report benefit from a visual surface.
+- Use plain chat for an ordinary yes-or-no decision other than finished-change review, which goes out as a Lavish proof page whenever Lavish is available, and `lavish-axi` for crucial blocking changes (gate findings or blockers that stop work until the captain decides) and for situations where several options or a structured report benefit from a visual surface.
 - Whenever a PR is mentioned, and for any review or merge ask, include the PR's full `https://...` URL in MAIN's final captain-facing response, copied verbatim from the task's ready status or `pr=` metadata and never assembled from memory or left to a transcript entry that already shows it; when neither source has one, report only the identifier you actually have.
 - Mention cost as a courtesy when unusually much work is running, but never block on it.
 
@@ -387,7 +388,7 @@ Fill `## Firstmate spec` (`{FIRSTMATE_SPEC}`) with only the build instructions t
 Keep additions task-specific rather than repeating lifecycle instructions, and alter generated sections only when the task genuinely differs from the standard shape.
 
 Every ship brief must retain the worktree-isolation assertion and stop if launched in the primary checkout.
-Every ship brief's `## Firstmate spec` must require the worker to capture proof while working - before screenshots of affected UI taken before changing it, after screenshots, and test output - and to build the Lavish proof page from it.
+Every ship brief's `## Firstmate spec` must require the worker to capture proof while working - before screenshots of affected UI taken before changing it, after screenshots, and test output - and to build the Lavish proof page from it, keeping the page and screenshots in the firstmate home's `data/<id>/`, never in the project worktree or PR, and opening and arming it under the [crew-hosted Lavish board contract](docs/configuration.md#crew-hosted-lavish-review-boards).
 If a ship task touches firstmate's shared tracked material, explicitly require `firstmate-coding-guidelines` before editing.
 If a task will drive Herdr lifecycle behavior, scaffold with `--herdr-lab`; if that need appears after an unguarded scaffold, stop and regenerate rather than adding commands by hand.
 The generated Herdr contract must use a named non-`default` isolated lab and its guarded helper for every lifecycle action.
