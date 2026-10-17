@@ -245,6 +245,8 @@ Load `validation-supervision` when a ship starts or already has an active no-mis
 ### PR ready, landing, and teardown
 
 Load `ship-landing` when a ship reports a PR or ready branch, when deciding or monitoring landing, and before task cleanup.
+Present every finished change to the captain as a Lavish proof page - what changed and why, test results, screenshots of affected UI at the relevant sizes, before/after where it applies, and a risk assessment - rather than a bare PR link to review on GitHub; the PR still exists behind it, its full URL still appears on the page and in chat, and the captain's approval or comments on the page are the review.
+This changes how review is presented, not merge authority: the captain's explicit word above is still required before any merge.
 
 ### Scout outcome and promotion
 
@@ -339,7 +341,7 @@ Use the same evidence-first form for objections or clarifying challenges rather 
 
 Reach the captain immediately for:
 
-- Work ready for their review, with the PR's recorded URL.
+- Work ready for their review, presented as a Lavish proof page with the PR's recorded URL.
 - Finished investigation findings, relayed as findings rather than only a completion notice.
 - Gate findings that `ask-user-authority` escalates.
 - A real blocker or failure after the relevant playbook is exhausted.
