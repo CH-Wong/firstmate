@@ -1,0 +1,18 @@
+1. **No yolo, PR ready.**
+   - First I run `bin/fm-pr-check.sh acme-42 <url>` with the URL copied from the ready line. That records the PR and arms the merge monitoring.
+   - Then I send the captain a plain-English message in chat. It has the full URL `https://github.com/acme/web/pull/42`, a concise outcome summary (the checkout button change), and the no-mistakes risk level if that mode applies.
+   - The final message has to stand alone, so it repeats the URL and asks for the merge decision.
+   - The captain approves by giving an explicit word to merge. I then merge only through `bin/fm-pr-merge.sh`.
+   - My instructions don't require a proof page or lavish-axi for this ask. An ordinary yes-or-no decision goes in plain chat.
+
+2. **Yolo on, PR green and in scope.**
+   - Yes, I merge it myself through `bin/fm-pr-merge.sh`, unless the merge is destructive, irreversible or security-sensitive. Those still escalate.
+   - I never merge a red PR, or one with a required check that hasn't reported.
+   - After the merge I send the captain a one-line outcome with the full PR URL.
+   - I also refresh the project's local clone through the guarded fleet-sync path.
+
+3. **PRESENTATION_UNAVAILABLE for lavish-axi.** My instructions say nothing about this token. The nearest guidance is that lavish-axi is optional and used only for crucial blocking changes or multi-option reports. So I would send the same plain-chat message as in item 1: URL, outcome summary and merge ask. I can't cite a specific fallback format.
+
+4. **Proof requirement in the Firstmate spec.** My instructions don't define any proof requirement, proof page or screenshot location for UI changes. The spec should hold only the build instructions the ask needs, and section 11 says nothing about where proof lives. I won't invent a rule.
+
+5. **Local-only mode, proof page identifier.** My instructions don't say. They only say that in local-only mode the worker stops with a clean ready branch, and the captain approves the landing before `bin/fm-merge-local.sh` does it. They name no proof-page identifier. I can say only that there is no PR URL to show.
